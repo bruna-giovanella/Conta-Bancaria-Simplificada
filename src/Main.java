@@ -17,6 +17,7 @@ public class Main {
                 \n""", nomeCliente, tipoConta, saldo);
 
         boolean sistemaAtivo = true;
+
         while (sistemaAtivo) {
             System.out.print("""
                     \nOperações
@@ -29,21 +30,33 @@ public class Main {
                     Ação desejada: """);
 
             int decisaoDoCliente = sc.nextInt();
+
             switch (decisaoDoCliente) {
-                case 1:
+                case 1: // saldo atual
                     System.out.println("\nSeu saldo atual é de :" + saldo);
                     break;
-                case 2:
+
+                case 2: // receber valor
                     System.out.print("\nInforme o valor que será debitado: R$ ");
                     double valorDebito = sc.nextDouble();
-                    saldo += valorDebito;
+                    if (valorDebito < 0) {
+                        System.out.println("Valor Inválido");
+                    } else {
+                        saldo += valorDebito;
+                    }
                     break;
-                case 3:
+
+                case 3: // transferir valor
                     System.out.print("\nInforme o valor que será creditado: R$ ");
                     double valorCredito = sc.nextDouble();
-                    saldo -= valorCredito;
+                    if (valorCredito > saldo) {
+                        System.out.println("Saldo insuficiente");
+                    } else {
+                        saldo -= valorCredito;
+                    }
                     break;
-                case 4:
+
+                case 4: // sair
                     System.out.println("\nSaindo...");
                     sistemaAtivo = false;
                     break;
